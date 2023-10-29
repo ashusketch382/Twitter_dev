@@ -24,6 +24,7 @@ app.listen(PORT, async () => {
     // tweet.comments.push(comment);
     // await tweet.save();    
 
-    const tweet = await tweetRepository.getTweet('650e400cae3f5190e3250653');
-    console.log(tweet);
+    const tweet = await tweetRepository.getAll(4,3);
+    console.log(tweet[0].contentEmail);
+
 });
