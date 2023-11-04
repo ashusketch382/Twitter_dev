@@ -24,7 +24,10 @@ app.listen(PORT, async () => {
     // tweet.comments.push(comment);
     // await tweet.save();    
 
-    const tweet = await tweetRepository.getAll(4,3);
-    console.log(tweet[0].contentEmail);
+    // const tweet = await tweetRepository.getAll(4,3);
+    const tweet = await tweetRepository.createTweet({
+        content: "Now this time came with hooks"
+    });
+    console.log(tweet);
 
 });

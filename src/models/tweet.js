@@ -16,8 +16,15 @@ const tweetSchema = new mongoose.Schema({
 ]
 
 },{timestamps: true});
+
 tweetSchema.virtual('contentEmail').get(function () {
     return `${this.content} created by user: ${this.userEmail}`;
+});
+
+tweetSchema.pre('save', function(next){
+    console.log("Inside hook");
+    this.content = this.content + "....";
+    next();
 });
 const Tweet = mongoose.model('Tweet', tweetSchema)
 module.exports = Tweet;
