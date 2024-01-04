@@ -1,30 +1,16 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const tweetSchema = new mongoose.Schema({
     content: {
         type: String,
-        required: true
+        required: true,
+        max: [250, "Make it less than 250 char right now, other wise i will kill you right now,"]
     },
-    userEmail: {
-        type: String
-    },
-    comments: [
-        {
+    hashtags: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment"
-    }
-]
-
+        ref: 'Hashtag'
+    }]
 },{timestamps: true});
 
-tweetSchema.virtual('contentEmail').get(function () {
-    return `${this.content} created by user: ${this.userEmail}`;
-});
-
-tweetSchema.pre('save', function(next){
-    console.log("Inside hook");
-    this.content = this.content + "....";
-    next();
-});
 const Tweet = mongoose.model('Tweet', tweetSchema)
-module.exports = Tweet;
+export default Tweet;
